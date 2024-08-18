@@ -9,18 +9,25 @@ function Main() {
   };
 
   const calculate = () => {
-    const answer = eval(inputValue);
-    setInputValue(answer);
+    try {
+      const answer = eval(inputValue).toString();
+      setInputValue(answer);
+    } catch (error) {
+      setInputValue(error);
+      setTimeout(() => {
+        setInputValue("");
+      }, 1500);
+    }
   };
 
   const clear = () => {
     setInputValue("");
   };
 
-  const deleteLastValue = ()=>{
-    const str = inputValue.substring(0,inputValue.length-1);
+  const deleteLastValue = () => {
+    const str = inputValue.substring(0, inputValue.length - 1);
     setInputValue(str);
-  }
+  };
 
   return (
     <>
@@ -34,7 +41,9 @@ function Main() {
         <span onClick={() => clear()} className="clear">
           C
         </span>
-        <span onClick={deleteLastValue} className="">D</span>
+        <span onClick={deleteLastValue} className="">
+          D
+        </span>
         <span onClick={() => display("%")} className="">
           %
         </span>
